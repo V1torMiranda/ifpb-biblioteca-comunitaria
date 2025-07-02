@@ -1,0 +1,8 @@
+Produtos:
+	- Vídeo Comercial
+	- Vídeo Técnico (explicando os padrões utilizados e os requisitos implementados)
+	- Vídeo Demonstrativo (mostrando as funcionalidades do sistema)
+	- Documento de especificações (diagramas de classe, casos de uso, objetivos do sistema, requisitos funcionais e não funcionais)
+	- Código-fonte
+
+-> Os vídeos devem ter, cada um, até 2 minutos de duração.
