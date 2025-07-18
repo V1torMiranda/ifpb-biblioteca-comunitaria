@@ -9,12 +9,12 @@ using namespace std;
 class ManipuladorArquivo {
   private:
     string caminhoArquivo;
-    ifstream arqModoLeitura;
-    ofstream arquivoModoEscrita;
+    string modo;
+    fstream arq;
   
   public:
     ManipuladorArquivo(string caminho);
-    void abrir();
+    void abrir(string modo);
     void fechar();
     string lerLinha();
 
