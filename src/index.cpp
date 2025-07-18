@@ -1,10 +1,17 @@
 #include <iostream>
+#include <string>
+#include "./services/ManipuladorArquivo.hpp"
 
-using std::cout;
+using namespace std;
 
 int main() {
 
-  cout << "Jonas de Samos e Amanda de Abdera";
+  ManipuladorArquivo manip = ManipuladorArquivo("../database/users.txt");
+  manip.abrir();
+  cout << manip.lerLinha() << endl;
+
+
+  
 
   return 0;
 }

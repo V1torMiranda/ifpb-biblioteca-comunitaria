@@ -1,0 +1,2 @@
+#Esquema
+id;nome;email;senha;curso;creditos
