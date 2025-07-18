@@ -14,9 +14,12 @@ class ManipuladorArquivo {
   
   public:
     ManipuladorArquivo(string caminho);
+    ~ManipuladorArquivo();
+
     void abrir(string modo);
     void fechar();
     string lerLinha();
+    string getModo();
 
 };
 

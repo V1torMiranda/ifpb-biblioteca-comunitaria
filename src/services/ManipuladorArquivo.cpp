@@ -4,6 +4,12 @@
 ManipuladorArquivo::ManipuladorArquivo(string caminho) :
   caminhoArquivo(caminho) {}
 
+ManipuladorArquivo::~ManipuladorArquivo() {
+  if (this->arq.is_open()) {
+    this->fechar();
+  }
+}
+
 void ManipuladorArquivo::abrir(string modo) {
   this->arq = fstream();
 
@@ -11,7 +17,7 @@ void ManipuladorArquivo::abrir(string modo) {
     this->arq.open(this->caminhoArquivo, this->arq.in);
     this->modo = "leitura";
   } else if (modo == "escrita") {
-    this->arq.open(this->caminhoArquivo, this->arq.out);
+    this->arq.open(this->caminhoArquivo, this->arq.app);
     this->modo = "escrita";
   } else {
     cout << "Não existe esse modo para a manipulação de arquivos." << endl;
@@ -39,3 +45,5 @@ string ManipuladorArquivo::lerLinha() {
   getline(this->arq, dados);
   return dados;
 }
+
+string ManipuladorArquivo::getModo() { return this->modo; }

@@ -7,8 +7,11 @@ using namespace std;
 
 int main() {
 
-  fstream arq = fstream();
-  arq.open("../database/users.txt", arq.in);
+  ManipuladorArquivo manip = ManipuladorArquivo("../database/users.txt");
+  manip.abrir("leitura");
+  manip.lerLinha();
+
+  // cout << "";
 
 
   
