@@ -1,21 +1,17 @@
+#include "./services/FstreamAdapter.hpp"
 #include <iostream>
-#include <string>
-#include "./services/ManipuladorArquivo.hpp"
-#include <fstream>
 
 using namespace std;
 
 int main() {
 
-  ManipuladorArquivo manip = ManipuladorArquivo("../database/users.txt");
+  FstreamAdapter manip = FstreamAdapter("../database/users.txt");
   manip.abrir("leitura");
-  manip.lerLinha();
 
-  // cout << "";
+  cout << "Primeira linha: " << manip.lerLinha() << endl;
+  cout << "Segunda linha: " << manip.lerLinha() << endl;
+  cout << "Terceira linha: " << manip.lerLinha() << endl;
 
-
-  
-  
-
+  manip.fechar();
   return 0;
 }

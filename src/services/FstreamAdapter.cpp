@@ -1,16 +1,15 @@
-#include "./ManipuladorArquivo.hpp"
+#include "./FstreamAdapter.hpp"
 #include <iostream>
 
-ManipuladorArquivo::ManipuladorArquivo(string caminho) :
-  caminhoArquivo(caminho) {}
+FstreamAdapter::FstreamAdapter(string caminho) : caminhoArquivo(caminho) {}
 
-ManipuladorArquivo::~ManipuladorArquivo() {
+FstreamAdapter::~FstreamAdapter() {
   if (this->arq.is_open()) {
     this->fechar();
   }
 }
 
-void ManipuladorArquivo::abrir(string modo) {
+void FstreamAdapter::abrir(string modo) {
   this->arq = fstream();
 
   if (modo == "leitura") {
@@ -29,12 +28,12 @@ void ManipuladorArquivo::abrir(string modo) {
   }
 }
 
-void ManipuladorArquivo::fechar() {
+void FstreamAdapter::fechar() {
   this->arq.close();
   this->modo = "";
 }
 
-string ManipuladorArquivo::lerLinha() {
+string FstreamAdapter::lerLinha() {
   
   if (this->modo == "escrita") {
     cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << endl;
@@ -46,4 +45,18 @@ string ManipuladorArquivo::lerLinha() {
   return dados;
 }
 
-string ManipuladorArquivo::getModo() { return this->modo; }
+deque<string> FstreamAdapter::lerTodosDados() {
+  deque<string> linhas = {""};
+  return linhas;
+}
+
+void FstreamAdapter::escreverLinhaFinal(string linha) {
+
+}
+
+void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
+
+}
+
+string FstreamAdapter::getModo() { return this->modo; }
+
