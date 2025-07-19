@@ -39,6 +39,11 @@ string FstreamAdapter::lerLinha() {
     cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << endl;
     return "";
   }
+
+  else if (this->arq.eof()) {
+    cout << "O arquivo já foi lido totalmente." << endl;
+    return "";
+  }
   
   string dados;
   getline(this->arq, dados);
@@ -47,6 +52,11 @@ string FstreamAdapter::lerLinha() {
 
 deque<string> FstreamAdapter::lerTodosDados() {
   deque<string> linhas = {""};
+
+  // Movendo o ponteiro para o início do arquivo
+  this->arq.seekg(this->arq.beg);
+
+
   return linhas;
 }
 
