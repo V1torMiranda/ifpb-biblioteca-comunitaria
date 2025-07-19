@@ -1,4 +1,3 @@
-#Esquema
 id nome email senha curso creditos
 1000 Pedro pedro@gmail.com 891 informatica 90
 9211 Jussara ju 98 edif 12
