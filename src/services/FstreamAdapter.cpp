@@ -56,12 +56,30 @@ deque<string> FstreamAdapter::lerTodosDados() {
   // Movendo o ponteiro para o início do arquivo
   this->arq.seekg(this->arq.beg);
 
+  while (!this->arq.eof()) {
+    string linha = this->lerLinha();
+    if (linha != "")
+      linhas.push_back(linha);
+  }
 
   return linhas;
 }
 
 void FstreamAdapter::escreverLinhaFinal(string linha) {
 
+  if (this->modo == "leitura") {
+    cout << "O arquivo foi aberto em modo leitura. Nenhum dado será adicionado." << endl;
+    return;
+  }
+
+  // Verificar posteriormente qual o último character do arquivo
+  
+  
+  // Movendo o ponteiro para o fim do arquivo
+  this->arq.seekp(this->arq.end);
+  
+  linha = linha + "\n";
+  this->arq.write(linha.c_str(), linha.size());
 }
 
 void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {

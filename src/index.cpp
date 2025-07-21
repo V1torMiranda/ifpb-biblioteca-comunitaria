@@ -6,11 +6,9 @@ using namespace std;
 int main() {
 
   FstreamAdapter manip = FstreamAdapter("../database/users.txt");
-  manip.abrir("leitura");
+  manip.abrir("escrita");
 
-  cout << "Primeira linha: " << manip.lerLinha() << endl;
-  cout << "Segunda linha: " << manip.lerLinha() << endl;
-  cout << "Terceira linha: " << manip.lerLinha() << endl;
+  manip.escreverLinhaFinal("10101 William william.costa@gmail.com 1234 engComp 10");
 
   manip.fechar();
   return 0;
