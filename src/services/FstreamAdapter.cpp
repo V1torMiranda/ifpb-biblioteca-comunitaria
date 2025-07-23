@@ -1,13 +1,13 @@
 #include "./FstreamAdapter.hpp"
 #include <iostream>
 
-FstreamAdapter::FstreamAdapter(string caminho) : caminhoArquivo(caminho) {}
+FstreamAdapter::FstreamAdapter(string caminho) : caminhoArquivo(caminho), isOpen(false) {}
 
 FstreamAdapter::~FstreamAdapter() {
-  if (this->arq.is_open()) {
+  if (isOpen)
     this->fechar();
-  }
 }
+
 
 void FstreamAdapter::abrir(string modo) {
   this->arq = fstream();
@@ -15,9 +15,11 @@ void FstreamAdapter::abrir(string modo) {
   if (modo == "leitura") {
     this->arq.open(this->caminhoArquivo, this->arq.in);
     this->modo = "leitura";
+    this->isOpen = true;
   } else if (modo == "escrita") {
     this->arq.open(this->caminhoArquivo, this->arq.app);
     this->modo = "escrita";
+    this->isOpen = true;
   } else {
     cout << "Não existe esse modo para a manipulação de arquivos." << endl;
   }
@@ -31,9 +33,16 @@ void FstreamAdapter::abrir(string modo) {
 void FstreamAdapter::fechar() {
   this->arq.close();
   this->modo = "";
+  this->isOpen = false;
 }
 
+
+
 string FstreamAdapter::lerLinha() {
+
+  if (!isOpen) {
+    return "";
+  }
   
   if (this->modo == "escrita") {
     cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << endl;
@@ -51,7 +60,11 @@ string FstreamAdapter::lerLinha() {
 }
 
 deque<string> FstreamAdapter::lerTodosDados() {
-  deque<string> linhas = {""};
+  deque<string> linhas;
+
+  if (!isOpen) {
+    return linhas;
+  }
 
   if (this->modo == "escrita") {
     cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << endl;
@@ -72,48 +85,54 @@ deque<string> FstreamAdapter::lerTodosDados() {
 
 void FstreamAdapter::escreverLinhaFinal(string linha) {
 
+  if (!isOpen) {
+    return;
+  }
+
   if (this->modo == "leitura") {
     cout << "O arquivo foi aberto em modo leitura. Nenhum dado será adicionado." << endl;
     return;
   }
-
-  /* Verificar posteriormente qual o último character do arquivo */
   
   this->arq.seekp(this->arq.end); // Movendo o ponteiro para o fim do arquivo
   this->arq << linha + "\n";
+
+  /* Verificar posteriormente qual o último character do arquivo */
 }
 
 void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
   
+  if (!isOpen) {
+    return;  
+  }
+
   if (this->modo == "leitura") {
     cout << "O arquivo foi aberto em modo leitura. Nenhum dado será modificado." << endl;
     return;
   }
 
-
-
 }
 
 string FstreamAdapter::getModo() { return this->modo; }
 
-int FstreamAdapter::getQuantLinhas() { 
+int FstreamAdapter::getQuantLinhas() {
+
+  if (!isOpen) {
+    return 0;
+  }
   
-  string modoAntigo = this->getModo();
-
-  if (modoAntigo == "escrita") {
-    this->modo = "leitura";
+  int quantLinhas = 0;
+  
+  if (this->modo == "leitura") {
+    quantLinhas = (this->lerTodosDados()).size();
+    return quantLinhas;
   }
-
-  deque<string> linhas = this->lerTodosDados();
-
-  // for (string l : linhas)
-  //   cout << l << endl;
-
-  int quantLinhas = linhas.size();
-
-  if (modoAntigo == "escrita") {
-    this->modo = "escrita";
-  }
+  
+  // Abrindo uma cópia do arquivo em modo leitura
+  FstreamAdapter arqLeitura = FstreamAdapter(this->caminhoArquivo);
+  arqLeitura.abrir("leitura");
+  quantLinhas = (arqLeitura.lerTodosDados()).size();
+  arqLeitura.fechar();
   
   return quantLinhas; 
 }

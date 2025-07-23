@@ -9,6 +9,7 @@ class FstreamAdapter : public ManipuladorArquivoInterface {
     string caminhoArquivo;
     string modo;
     fstream arq;
+    bool isOpen;
   
   public:
     FstreamAdapter(string caminho);

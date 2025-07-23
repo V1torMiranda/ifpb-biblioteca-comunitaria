@@ -1,3 +1,3 @@
 # !/bin/bash
 
-g++ ./*.cpp ./*/*.cpp -o app  && gdb ./app && rm ./app
+g++ -g ./*.cpp ./*/*.cpp -o app  && gdb --tui ./app && rm ./app
