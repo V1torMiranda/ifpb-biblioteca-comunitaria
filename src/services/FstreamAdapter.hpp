@@ -24,6 +24,7 @@ class FstreamAdapter : public ManipuladorArquivoInterface {
     void modificarLinha(int numLinha, string novaLinha);
 
     string getModo();
+    int getQuantLinhas();
 };
 
 #endif

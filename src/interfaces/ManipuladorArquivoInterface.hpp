@@ -17,6 +17,7 @@ class ManipuladorArquivoInterface {
     virtual void modificarLinha(int numLinha, string novaLinha) = 0;
 
     virtual string getModo() = 0;
+    virtual int getQuantLinhas() = 0;
 };
 
 #endif

@@ -53,6 +53,11 @@ string FstreamAdapter::lerLinha() {
 deque<string> FstreamAdapter::lerTodosDados() {
   deque<string> linhas = {""};
 
+  if (this->modo == "escrita") {
+    cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << endl;
+    return linhas;
+  }
+
   // Movendo o ponteiro para o início do arquivo
   this->arq.seekg(this->arq.beg);
 
@@ -72,19 +77,44 @@ void FstreamAdapter::escreverLinhaFinal(string linha) {
     return;
   }
 
-  // Verificar posteriormente qual o último character do arquivo
+  /* Verificar posteriormente qual o último character do arquivo */
   
-  
-  // Movendo o ponteiro para o fim do arquivo
-  this->arq.seekp(this->arq.end);
-  
-  linha = linha + "\n";
-  this->arq.write(linha.c_str(), linha.size());
+  this->arq.seekp(this->arq.end); // Movendo o ponteiro para o fim do arquivo
+  this->arq << linha + "\n";
 }
 
 void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
+  
+  if (this->modo == "leitura") {
+    cout << "O arquivo foi aberto em modo leitura. Nenhum dado será modificado." << endl;
+    return;
+  }
+
+
 
 }
 
 string FstreamAdapter::getModo() { return this->modo; }
+
+int FstreamAdapter::getQuantLinhas() { 
+  
+  string modoAntigo = this->getModo();
+
+  if (modoAntigo == "escrita") {
+    this->modo = "leitura";
+  }
+
+  deque<string> linhas = this->lerTodosDados();
+
+  // for (string l : linhas)
+  //   cout << l << endl;
+
+  int quantLinhas = linhas.size();
+
+  if (modoAntigo == "escrita") {
+    this->modo = "escrita";
+  }
+  
+  return quantLinhas; 
+}
 
