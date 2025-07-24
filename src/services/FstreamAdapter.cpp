@@ -20,6 +20,11 @@ void FstreamAdapter::abrir(string modo) {
     this->arq.open(this->caminhoArquivo, this->arq.app);
     this->modo = "escrita";
     this->isOpen = true;
+  } else if (modo == "sobrescrita") {
+    this->arq.open(this->caminhoArquivo, this->arq.out);
+    // ios_base::openmode
+    this->modo = "sobrescrita";
+    this->isOpen = true;
   } else {
     cout << "Não existe esse modo para a manipulação de arquivos." << endl;
   }
@@ -44,7 +49,7 @@ string FstreamAdapter::lerLinha() {
     return "";
   }
   
-  if (this->modo == "escrita") {
+  if (this->modo == "escrita" || this->modo == "sobrescrita") {
     cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << endl;
     return "";
   }
@@ -66,7 +71,7 @@ deque<string> FstreamAdapter::lerTodosDados() {
     return linhas;
   }
 
-  if (this->modo == "escrita") {
+  if (this->modo == "escrita" || this->modo == "sobrescrita") {
     cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << endl;
     return linhas;
   }
@@ -110,6 +115,30 @@ void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
     cout << "O arquivo foi aberto em modo leitura. Nenhum dado será modificado." << endl;
     return;
   }
+
+  // Criando um novo arquivo com os dados atualizados do arquivo atual
+  FstreamAdapter arqModificado = FstreamAdapter("../database/arq-modificado.txt");
+  arqModificado.abrir("sobrescrita");
+
+  // Cópia do arquivo atual em modo leitura
+  FstreamAdapter arqLeitura = FstreamAdapter(this->caminhoArquivo);
+  arqLeitura.abrir("leitura");
+  deque<string> conteudoArqAtual = arqLeitura.lerTodosDados();
+  arqLeitura.fechar();
+
+  for (int i = 0; i < numLinha - 1; i++)
+    arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
+  
+  arqModificado.escreverLinhaFinal(novaLinha);
+  
+  // Escrevendo o resto das linhas
+  // for (int i = numLinha - 1; i < conteudoArqAtual.size(); i++)
+  //   arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
+
+
+  arqModificado.fechar();
+
+  
 
 }
 

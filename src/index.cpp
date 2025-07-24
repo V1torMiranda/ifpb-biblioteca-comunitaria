@@ -8,8 +8,8 @@ int main() {
   FstreamAdapter manip = FstreamAdapter("../database/users.txt");
   manip.abrir("escrita");
   
-  cout << manip.getQuantLinhas() << endl;
-  
+  manip.modificarLinha(4, "121 Felipe felipe@ifpb.com.br 212 min 90");
+
   manip.fechar();
   return 0;
 }
