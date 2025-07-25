@@ -14,7 +14,6 @@ class LoginFacade {
   public:
     void login(string email, string senha);
     void exibirMenu();
-    void sair();
 };
 
 #endif

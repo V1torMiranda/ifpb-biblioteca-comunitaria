@@ -7,4 +7,5 @@ Produtos:
 
 -> Os vídeos devem ter, cada um, até 2 minutos de duração.
 
+-> Pedir para a IA gerar alguns dados aleatórios para povar o banco de dados.
 -> Resolver o problema de modificar dados no arquivo. 
