@@ -109,7 +109,7 @@ void FstreamAdapter::escreverLinhaFinal(string linha) {
     return;
   }
   
-  // this->arq.seekp(this->arq.end); // Movendo o ponteiro para o fim do arquivo
+  linha += "\n";
   this->arq << linha;
 
   /* Verificar posteriormente qual o último character do arquivo */
@@ -126,7 +126,7 @@ void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
     return;
   }
 
-  if (numLinha > this->getQuantLinhas()) {
+  if (numLinha > this->getQuantLinhas() || numLinha <= 0) {
     cout << "O seu arquivo ainda não tem essa linha para ser modificada. Nenhum dado será modificado" << endl;
     return;
   }
@@ -135,34 +135,24 @@ void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
   FstreamAdapter arqModificado = FstreamAdapter("../database/arq-modificado.txt");
   arqModificado.abrir("sobrescrita");
 
-  arqModificado.escreverLinhaFinal(novaLinha);
-
   // Cópia do arquivo atual em modo leitura
-  // FstreamAdapter arqLeitura = FstreamAdapter(this->caminhoArquivo);
-  // arqLeitura.abrir("leitura");
-  // deque<string> conteudoArqAtual = arqLeitura.lerTodosDados();
-  // arqLeitura.fechar();
+  FstreamAdapter arqLeitura = FstreamAdapter(this->caminhoArquivo);
+  arqLeitura.abrir("leitura");
+  deque<string> conteudoArqAtual = arqLeitura.lerTodosDados();
+  arqLeitura.fechar();
 
-  // for (int i = 0; i < numLinha - 1; i++)
-  //   arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
+  // Escrevendo as linhas anteriores à especificada
+  for (int i = 0; i < numLinha - 1; i++)
+    arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
   
+  // Sobrescrevendo a linha
+  arqModificado.escreverLinhaFinal(novaLinha);
   
-  
-
-
-
-
   // Escrevendo o resto das linhas
-  // for (int i = numLinha - 1; i < conteudoArqAtual.size(); i++)
-  //   arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
-
+  for (int i = numLinha; i < conteudoArqAtual.size(); i++)
+    arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
 
   arqModificado.fechar();
-
-
-
-  
-
 }
 
 string FstreamAdapter::getModo() { return this->modo; }
