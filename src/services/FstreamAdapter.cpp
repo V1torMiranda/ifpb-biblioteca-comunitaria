@@ -1,6 +1,17 @@
 #include "./FstreamAdapter.hpp"
 #include <iostream>
 
+/*  
+  std::ios_base::openmode:
+    - app: joga o ponteiro para o fim do arquivo antes de cada escrita
+    - ate: joga o ponteiro para o fim do arquivo (problemático)
+    - in: modo leitura
+    - binary: trata arquivos binários (problemático)
+    - trunc: a prinçípio, limparia o conteúdo do arquivo (problemático)
+    - out: modo escrita
+*/  
+
+
 FstreamAdapter::FstreamAdapter(string caminho) : caminhoArquivo(caminho), isOpen(false) {}
 
 FstreamAdapter::~FstreamAdapter() {
@@ -21,8 +32,7 @@ void FstreamAdapter::abrir(string modo) {
     this->modo = "escrita";
     this->isOpen = true;
   } else if (modo == "sobrescrita") {
-    this->arq.open(this->caminhoArquivo, this->arq.out);
-    // ios_base::openmode
+    this->arq.open(this->caminhoArquivo, ios_base::out);
     this->modo = "sobrescrita";
     this->isOpen = true;
   } else {
@@ -99,8 +109,8 @@ void FstreamAdapter::escreverLinhaFinal(string linha) {
     return;
   }
   
-  this->arq.seekp(this->arq.end); // Movendo o ponteiro para o fim do arquivo
-  this->arq << linha + "\n";
+  // this->arq.seekp(this->arq.end); // Movendo o ponteiro para o fim do arquivo
+  this->arq << linha;
 
   /* Verificar posteriormente qual o último character do arquivo */
 }
@@ -116,27 +126,40 @@ void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
     return;
   }
 
+  if (numLinha > this->getQuantLinhas()) {
+    cout << "O seu arquivo ainda não tem essa linha para ser modificada. Nenhum dado será modificado" << endl;
+    return;
+  }
+
   // Criando um novo arquivo com os dados atualizados do arquivo atual
   FstreamAdapter arqModificado = FstreamAdapter("../database/arq-modificado.txt");
   arqModificado.abrir("sobrescrita");
 
-  // Cópia do arquivo atual em modo leitura
-  FstreamAdapter arqLeitura = FstreamAdapter(this->caminhoArquivo);
-  arqLeitura.abrir("leitura");
-  deque<string> conteudoArqAtual = arqLeitura.lerTodosDados();
-  arqLeitura.fechar();
-
-  for (int i = 0; i < numLinha - 1; i++)
-    arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
-  
   arqModificado.escreverLinhaFinal(novaLinha);
+
+  // Cópia do arquivo atual em modo leitura
+  // FstreamAdapter arqLeitura = FstreamAdapter(this->caminhoArquivo);
+  // arqLeitura.abrir("leitura");
+  // deque<string> conteudoArqAtual = arqLeitura.lerTodosDados();
+  // arqLeitura.fechar();
+
+  // for (int i = 0; i < numLinha - 1; i++)
+  //   arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
   
+  
+  
+
+
+
+
   // Escrevendo o resto das linhas
   // for (int i = numLinha - 1; i < conteudoArqAtual.size(); i++)
   //   arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
 
 
   arqModificado.fechar();
+
+
 
   
 
