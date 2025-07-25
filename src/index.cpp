@@ -1,18 +1,25 @@
-#include "./services/FstreamAdapter.hpp"
-#include <iostream>
+#include "./services/FstreamAdapter/FstreamAdapter.hpp"
+#include "./services/LoginFacade/LoginFacade.hpp"
 
 using namespace std;
 
 int main() {
 
-  FstreamAdapter manip = FstreamAdapter("../database/users.txt");
-  manip.abrir("escrita");
-  
-  manip.modificarLinha(4, "902 Jonas jonas@gmail.com 141 filosofia 87");
+  LoginFacade login;
 
-  manip.fechar();
+  int escolha;
+  do {
+    login.exibirMenu();
 
+    cout << "Digite a sua opção: ";
+    cin >> escolha;
 
+    while (escolha < 1 || escolha > 2) {
+      cout << "Valor inválido. Tente novamente: ";
+      cin >> escolha;
+    }
+
+  } while (escolha != 2);
 
   return 0;
 }

@@ -2,7 +2,7 @@
 #define FSTREAM_ADAPTER_HPP
 
 #include <fstream>
-#include "../interfaces/ManipuladorArquivoInterface.hpp"
+#include "../../interfaces/ManipuladorArquivoInterface.hpp"
 
 class FstreamAdapter : public ManipuladorArquivoInterface {
   private:

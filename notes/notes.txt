@@ -1,5 +1,3 @@
-Implementar o Adapter
-
 <list>: manipula apenas as extremidades (início e fim)
   - Tanto adição quanto remoção
   - Só se acessa os elementos das extremidades

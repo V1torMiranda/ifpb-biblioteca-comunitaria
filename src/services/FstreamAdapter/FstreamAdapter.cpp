@@ -141,6 +141,8 @@ void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
   deque<string> conteudoArqAtual = arqLeitura.lerTodosDados();
   arqLeitura.fechar();
 
+
+  
   // Escrevendo as linhas anteriores à especificada
   for (int i = 0; i < numLinha - 1; i++)
     arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
@@ -151,6 +153,8 @@ void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
   // Escrevendo o resto das linhas
   for (int i = numLinha; i < conteudoArqAtual.size(); i++)
     arqModificado.escreverLinhaFinal(conteudoArqAtual[i]);
+
+  
 
   arqModificado.fechar();
 }
