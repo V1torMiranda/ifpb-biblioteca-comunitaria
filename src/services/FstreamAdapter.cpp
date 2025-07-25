@@ -52,7 +52,6 @@ void FstreamAdapter::fechar() {
 }
 
 
-
 string FstreamAdapter::lerLinha() {
 
   if (!isOpen) {
@@ -97,6 +96,7 @@ deque<string> FstreamAdapter::lerTodosDados() {
 
   return linhas;
 }
+
 
 void FstreamAdapter::escreverLinhaFinal(string linha) {
 
@@ -154,6 +154,7 @@ void FstreamAdapter::modificarLinha(int numLinha, string novaLinha) {
 
   arqModificado.fechar();
 }
+
 
 string FstreamAdapter::getModo() { return this->modo; }
 
