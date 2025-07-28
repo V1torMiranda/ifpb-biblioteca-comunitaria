@@ -1,5 +1,11 @@
+<<<<<<< HEAD
+
+=======
+png-files/
 .vscode/
 
+
+>>>>>>> dev
 # Prerequisites
 *.d
 

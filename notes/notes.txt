@@ -1,0 +1,29 @@
+-> Id como uuid.
+
+-> Cursos disponíveis: {
+  - Informática: info
+  - Petróleo e Gás: pg
+  - Edificações: edif
+  - Mineração: min
+  - Química: quim
+
+  - Engenharia Civil: engciv
+  - Engenharia de Computação: engcomp
+  - Telemática: tel
+  - Matemática: mat
+  - Física: fis
+}
+
+-> <list> X <vector> {
+    <list>: manipula apenas as extremidades (início e fim)
+    - Tanto adição quanto remoção
+    - Só se acessa os elementos das extremidades
+    - É uma implementação com encadeamento
+
+  <vector>: manipula apenas a extremidade do fim
+    - Não tem como mexer no início
+    - Pode-se acessar qualquer elemento através do índice
+
+  Uma solução para o <list> pode ser o <deque>, que adiciona e remove em ambas as extremidades e cujos elementos são acessíveis por índice
+}
+

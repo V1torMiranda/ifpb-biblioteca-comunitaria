@@ -1,0 +1,5 @@
+id nome email senha curso creditos
+1000 Pedro pedro@gmail.com 891 informatica 90
+9211 Jussara ju 98 edif 12
+902 Jonas jonas@gmail.com 141 filosofia 87
+10101 William william.costa@gmail.com 1234 engComp 10
