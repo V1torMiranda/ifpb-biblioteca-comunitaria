@@ -1,4 +1,5 @@
 -> Id como uuid.
+-> Adm's são identificados pela terminação "@adm.ifpb.edu.br" no email
 
 -> Cursos disponíveis: {
   - Informática: info
