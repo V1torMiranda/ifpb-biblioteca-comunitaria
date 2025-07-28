@@ -6,14 +6,18 @@
 
 class LoginFacade {
   private:
-    // FstreamAdapter bancoDados
+    FstreamAdapter bancoDados;
+    deque<string> opcoes;
     void limparTela();
     void desenharLinha(int tamanho);
     void desenharTitulo(string titulo);
   
   public:
+    LoginFacade();
+    ~LoginFacade();
     void login(string email, string senha);
     void exibirMenu();
+    void validaEntrada(int& escolha);
 };
 
 #endif

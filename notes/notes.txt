@@ -1,3 +1,5 @@
+-> Sempre quando for abrir um arquivo, o caminho de referência é o diretório onde o executável está localizado
+
 -> Id como uuid.
 -> Adm's são identificados pela terminação "@adm.ifpb.edu.br" no email
 

@@ -24,11 +24,11 @@ void FstreamAdapter::abrir(string modo) {
   this->arq = fstream();
 
   if (modo == "leitura") {
-    this->arq.open(this->caminhoArquivo, this->arq.in);
+    this->arq.open(this->caminhoArquivo, ios_base::in);
     this->modo = "leitura";
     this->isOpen = true;
   } else if (modo == "escrita") {
-    this->arq.open(this->caminhoArquivo, this->arq.app);
+    this->arq.open(this->caminhoArquivo, ios_base::app);
     this->modo = "escrita";
     this->isOpen = true;
   } else if (modo == "sobrescrita") {
@@ -87,6 +87,7 @@ deque<string> FstreamAdapter::lerTodosDados() {
 
   // Movendo o ponteiro para o início do arquivo
   this->arq.seekg(this->arq.beg);
+  this->lerLinha();
 
   while (!this->arq.eof()) {
     string linha = this->lerLinha();
