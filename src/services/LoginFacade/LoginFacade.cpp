@@ -1,41 +1,44 @@
-#include "./LoginFacade.hpp"
+#include "LoginFacade.hpp"
 
+LoginFacade::LoginFacade(const std::string& caminhoArquivoUsuarios)
+        : usuarioRepo(caminhoArquivoUsuarios) {}
 
-void LoginFacade::login(string email, string senha) {
-
+bool LoginFacade::login(const std::string& email, const std::string& senha) {
+    return usuarioRepo.validarCredenciais(email, senha);
 }
 
 void LoginFacade::limparTela() {
-  system("clear");
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 }
 
 void LoginFacade::desenharLinha(int tamanho) {
-  for (int i = 0; i < tamanho; i++)
-    cout << "=";
-  cout << endl;
+    for (int i = 0; i < tamanho; i++)
+        std::cout << "=";
+    std::cout << std::endl;
 }
 
-void LoginFacade::desenharTitulo(string titulo) {
-  int tamTitulo = titulo.size();
-  int espacamento = 5;
+void LoginFacade::desenharTitulo(const std::string& titulo) {
+    int tamTitulo = static_cast<int>(titulo.size());
+    int espacamento = 5;
 
-  this->desenharLinha(tamTitulo + (espacamento * 2));
-  for (int i = 0; i < espacamento; i++)
-    cout << " ";
+    desenharLinha(tamTitulo + (espacamento * 2));
+    for (int i = 0; i < espacamento; i++)
+        std::cout << " ";
 
-  cout << titulo << endl; 
-  this->desenharLinha(tamTitulo + (espacamento * 2));
+    std::cout << titulo << std::endl;
+    desenharLinha(tamTitulo + (espacamento * 2));
 }
 
 void LoginFacade::exibirMenu() {
-  this->limparTela();
-  this->desenharTitulo("BIBLIOTECA COMUNITARIA PARA MEMBROS DO IFPB/CG");
+    limparTela();
+    desenharTitulo("BIBLIOTECA COMUNITARIA PARA MEMBROS DO IFPB/CG");
 
-  cout << endl;
-
-  deque<string> opcoes = { "1 - Fazer login", "2 - Fechar o programa" };
-  for (string o : opcoes)
-    cout << o << endl;
-  
-  cout << endl;
+    std::cout << std::endl;
+    std::cout << "1 - Fazer login" << std::endl;
+    std::cout << "2 - Fechar o programa" << std::endl;
+    std::cout << std::endl;
 }
