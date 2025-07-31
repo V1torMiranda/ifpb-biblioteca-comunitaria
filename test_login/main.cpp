@@ -1,6 +1,6 @@
 #include <iostream>
-#include "..\repositories/UsuarioRepository.h"
-#include "..\services/LoginFacade/LoginFacade.hpp"
+#include "../ifpb-biblioteca-comunitaria/src/repositories/UsuarioRepository.h"
+#include "../ifpb-biblioteca-comunitaria/src/services/LoginFacade/LoginFacade.hpp"
 
 int main() {
     LoginFacade loginFacade;
