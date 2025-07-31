@@ -77,12 +77,13 @@ deque<string> FstreamAdapter::lerTodosDados() {
     }
 
     if (this->modo == "escrita" || this->modo == "sobrescrita") {
-        std::cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << std::endl;
+        cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << endl;
         return linhas;
     }
 
     // Movendo o ponteiro para o início do arquivo
     this->arq.seekg(this->arq.beg);
+    this->lerLinha();
 
     while (!this->arq.eof()) {
         string linha = this->lerLinha();

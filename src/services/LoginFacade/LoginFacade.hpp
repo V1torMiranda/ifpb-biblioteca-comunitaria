@@ -8,6 +8,7 @@
 class LoginFacade {
 private:
     UsuarioRepository usuarioRepo;
+    deque<string> opcoes;
 
     void limparTela();
     void desenharLinha(int tamanho);
@@ -16,11 +17,12 @@ private:
 public:
     // Construtor agora recebe caminho do arquivo de usuários (default definido)
     explicit LoginFacade(const std::string& caminhoArquivoUsuarios = "../database/users.txt");
+    ~LoginFacade();
 
     // Retorna true se login válido, false caso contrário
     bool login(const std::string& email, const std::string& senha);
-
     void exibirMenu();
+    void validaEntrada(int& escolha);
 };
 
 #endif
