@@ -1,10 +1,4 @@
-//
 // Created by vitor on 31/07/2025.
-//
-
-//
-// Created by vitor on 30/07/2025.
-//
 
 #include "Livro.h"
 #include <sstream>
@@ -46,3 +40,4 @@ Livro Livro::fromCSV(const std::string& linhaCSV) {
 
     return Livro(std::stoi(idStr), titulo, autor, editora, std::stoi(anoStr), disponivelStr == "1");
 }
+

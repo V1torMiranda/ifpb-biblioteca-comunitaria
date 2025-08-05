@@ -4,22 +4,19 @@
 using namespace std;
 
 int main() {
+  
+  LoginFacade login;  
+  login.login("julia@gmail.com", "JuL$21!");
 
-  LoginFacade login;
+  // int escolha;
+  // do {
+  //   login.exibirMenu();
 
-  int escolha;
-  do {
-    login.exibirMenu();
+  //   cout << "Digite a sua opção: ";
+  //   cin >> escolha;
 
-    cout << "Digite a sua opção: ";
-    cin >> escolha;
-
-    while (escolha < 1 || escolha > 2) {
-      cout << "Valor inválido. Tente novamente: ";
-      cin >> escolha;
-    }
-
-  } while (escolha != 2);
+  //   login.validaEntrada(escolha);
+  // } while (escolha != 2);
 
   return 0;
 }
