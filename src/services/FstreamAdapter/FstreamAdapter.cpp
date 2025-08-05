@@ -83,6 +83,7 @@ deque<string> FstreamAdapter::lerTodosDados() {
 
     // Movendo o ponteiro para o início do arquivo
     this->arq.seekg(this->arq.beg);
+    this->lerLinha();
 
     while (!this->arq.eof()) {
         string linha = this->lerLinha();

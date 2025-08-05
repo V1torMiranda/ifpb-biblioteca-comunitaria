@@ -24,6 +24,7 @@ add_executable(biblioteca_comunitaria
         src/index.cpp
         src/repositories/UsuarioRepository.cpp
         test_login/main.cpp
+<<<<<<< HEAD
         src/classes/Livro/Livro.h
         src/classes/Livro/Livro.cpp
         src/repositories/LivroRepository.cpp
@@ -48,6 +49,8 @@ add_executable(biblioteca_comunitaria
         src/services/LoginFacade/Comandos/ModificarUsuarioCommand.h
         src/services/LoginFacade/Comandos/RemoverUsuarioCommand.cpp
         src/services/LoginFacade/ICommand.h
+=======
+>>>>>>> cf5146800141e1a1d1353bc84f6d951df50ec80f
 )
 
 # Executável de teste (State Pattern)
@@ -76,6 +79,7 @@ target_include_directories(test_login PRIVATE
         services/FstreamAdapter
 )
 
+<<<<<<< HEAD
 add_executable(test_livro
         test_livro/main.cpp
         src/classes/Livro/Livro.cpp
@@ -109,5 +113,7 @@ add_executable(test_login_menu
         src/services/LoginFacade/Comandos/RemoverUsuarioCommand.cpp
 )
 
+=======
+>>>>>>> cf5146800141e1a1d1353bc84f6d951df50ec80f
 
 

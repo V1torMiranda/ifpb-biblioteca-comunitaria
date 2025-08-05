@@ -1,6 +1,11 @@
 #include <iostream>
+<<<<<<< HEAD
 #include "..\repositories/UsuarioRepository.h"
 #include "..\services/LoginFacade/LoginFacade.hpp"
+=======
+#include "../ifpb-biblioteca-comunitaria/src/repositories/UsuarioRepository.h"
+#include "../ifpb-biblioteca-comunitaria/src/services/LoginFacade/LoginFacade.hpp"
+>>>>>>> cf5146800141e1a1d1353bc84f6d951df50ec80f
 
 int main() {
     LoginFacade loginFacade;
