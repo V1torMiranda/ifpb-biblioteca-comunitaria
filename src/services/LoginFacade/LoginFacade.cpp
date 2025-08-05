@@ -25,6 +25,7 @@ bool LoginFacade::login(const std::string& email, const std::string& senha) {
 
 bool LoginFacade::isAdmin(const std::string& email) {
     return usuarioRepo.isAdmin(email);
+}
 
 /**
  * Código original obtido em: https://pt.stackoverflow.com/questions/448483/implementa%C3%A7%C3%A3o-do-split-em-c. 
@@ -46,14 +47,14 @@ deque<string> split(const string& text, char sep = ' ') {
 
 
 void LoginFacade::limparTela() {
-#ifdef _WIN32
-    // Windows
-    std::system("cls");
-#else
-    // Linux / Mac - usa códigos ANSI para limpar a tela e posicionar o cursor no topo
-    std::cout << "\x1B[2J\x1B[H";
-    std::cout.flush();
-#endif
+    #ifdef _WIN32
+        // Windows
+        std::system("cls");
+    #else
+        // Linux / Mac - usa códigos ANSI para limpar a tela e posicionar o cursor no topo
+        std::cout << "\x1B[2J\x1B[H";
+        std::cout.flush();
+    #endif
 }
 
 

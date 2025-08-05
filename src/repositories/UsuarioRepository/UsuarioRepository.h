@@ -3,8 +3,8 @@
 
 #include <deque>
 #include <string>
-#include "../services/FstreamAdapter/FstreamAdapter.hpp"
-#include "../classes/User/User.hpp"
+#include "../../services/FstreamAdapter/FstreamAdapter.hpp"
+#include "../../classes/Usuario/Usuario.hpp"
 
 class UsuarioRepository {
 private:

@@ -1,7 +1,7 @@
 Padrões utilizados: {
-  - Facade (modificar)
   - Adapter (X)
-  - 
+  - Facade (modificar)
+  - Repository (...?)
 }
 
 
