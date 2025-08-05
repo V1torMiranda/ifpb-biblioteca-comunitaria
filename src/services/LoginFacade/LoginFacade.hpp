@@ -1,27 +1,30 @@
 #ifndef LOGIN_FACADE_HPP
 #define LOGIN_FACADE_HPP
 
-#include <iostream>
-#include <string>
 #include "../../repositories/UsuarioRepository.h"
+#include <string>
+#include <map>
+#include <memory>
+#include "ICommand.h"
 
 class LoginFacade {
 private:
     UsuarioRepository usuarioRepo;
-    deque<string> opcoes;
-
+    std::map<int, std::unique_ptr<ICommand>> comandos;
+    deque<string> opcoes;  
+    
+    void registrarComandos(bool admin);
     void limparTela();
     void desenharLinha(int tamanho);
     void desenharTitulo(const std::string& titulo);
+    void exibirMenuPadrao();
+    void exibirMenuAdmin();
 
 public:
-    // Construtor agora recebe caminho do arquivo de usuários (default definido)
-    explicit LoginFacade(const std::string& caminhoArquivoUsuarios = "../database/users.txt");
-    ~LoginFacade();
-
-    // Retorna true se login válido, false caso contrário
+    explicit LoginFacade(const std::string& caminhoUsuarios);
     bool login(const std::string& email, const std::string& senha);
-    void exibirMenu();
+    bool isAdmin(const std::string& email);
+    void exibirMenuPrincipal(const std::string& email);
     void validaEntrada(int& escolha);
 };
 

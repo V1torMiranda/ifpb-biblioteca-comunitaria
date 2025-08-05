@@ -77,7 +77,7 @@ deque<string> FstreamAdapter::lerTodosDados() {
     }
 
     if (this->modo == "escrita" || this->modo == "sobrescrita") {
-        cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << endl;
+        std::cout << "O seu arquivo foi aberto em modo escrita. Nenhum dado será lido." << std::endl;
         return linhas;
     }
 

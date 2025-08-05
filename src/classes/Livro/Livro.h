@@ -1,6 +1,4 @@
-//
-// Created by vitor on 30/07/2025.
-//
+// Created by vitor on 31/07/2025.
 
 #ifndef BIBLIOTECA_COMUNITARIA_LIVRO_H
 #define BIBLIOTECA_COMUNITARIA_LIVRO_H

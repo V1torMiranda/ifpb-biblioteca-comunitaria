@@ -1,26 +1,20 @@
 #ifndef USUARIO_REPOSITORY_HPP
 #define USUARIO_REPOSITORY_HPP
 
-#include <string>
 #include <deque>
+#include <string>
 #include "../services/FstreamAdapter/FstreamAdapter.hpp"
-
-using std::string;
-using std::deque;
+#include "../classes/User/User.hpp"
 
 class UsuarioRepository {
 private:
     FstreamAdapter arquivoUsuarios;
 
 public:
-    explicit UsuarioRepository(const string& caminhoArquivo);
+    explicit UsuarioRepository(const std::string& caminhoArquivo);
 
-    // Valida se existe um usuário com email e senha correspondentes
-    bool validarCredenciais(const string& email, const string& senha);
-
-    // (Futuro) métodos adicionais:
-    // bool cadastrarUsuario(const Usuario& user);
-    // bool removerUsuario(int id);
+    bool validarCredenciais(const std::string& email, const std::string& senha);
+    bool isAdmin(const std::string& email);
 };
 
 #endif

@@ -1,3 +1,14 @@
+id;nome;email;senha;curso;creditos
+1000;Pedro;pedro@gmail.com;891;informatica;90
+9211;Jussara;ju@gmail.com;98;edif;12
+10101;William;william.costa@gmail.com;1234;engComp;10
+52179;Joao;joao.miguel@adm.ifpb.edu.br;4321;ads;57
+52180;Maria;maria.souza@adm.ifpb.edu.br;8765;engComp;62
+52181;Carlos;carlos.santos@adm.ifpb.edu.br;1357;redes;48
+52182;Ana;ana.lima@adm.ifpb.edu.br;2468;ads;75
+52183;Pedro;pedro.alves@adm.ifpb.edu.br;9876;engComp;53
+52184;Luiza;luiza.costa@adm.ifpb.edu.br;1122;informatica;60
+=======
 id nome email senha curso creditos
 a3f2b700-91a1-4bb7-9dce-231c99117ad5 Joao joao@adm.ifpb.edu.br Jo@o2024! info 32
 7d235c34-519e-455c-bec4-5b0c0177f4f2 Ana ana@adm.ifpb.edu.br An@#543pg pg 28
