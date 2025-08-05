@@ -1,7 +1,7 @@
 #ifndef LOGIN_FACADE_HPP
 #define LOGIN_FACADE_HPP
 
-#include "../../repositories/UsuarioRepository.h"
+#include "../../repositories/UsuarioRepository/UsuarioRepository.h"
 #include <string>
 #include <map>
 #include <memory>
