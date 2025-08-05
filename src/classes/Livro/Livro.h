@@ -21,8 +21,7 @@ private:
 
 public:
     Livro();
-    Livro(int id, const std::string& titulo, const std::string& autor,
-          const std::string& editora, int ano, bool disponivel = true);
+    Livro(int id, const std::string& titulo, const std::string& autor, const std::string& editora, int ano, bool disponivel = true);
 
     int getId() const;
     std::string getTitulo() const;
@@ -36,9 +35,6 @@ public:
     void setEditora(const std::string& editora);
     void setAno(int ano);
     void setDisponivel(bool disponivel);
-
-    std::string toCSV() const;
-    static Livro fromCSV(const std::string& linhaCSV);
 };
 
 #endif

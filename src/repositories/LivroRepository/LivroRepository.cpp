@@ -1,16 +1,42 @@
-//
 // Created by vitor on 30/07/2025.
-//
 
-#include "LivroRepository.h"
+#include "./LivroRepository.h"
 #include <sstream>
 #include <iostream>
 
 LivroRepository::LivroRepository(const std::string& caminhoArquivo) : arquivoLivros(caminhoArquivo) {}
 
+
+std::string LivroRepository::livroToCSV(const Livro& livro) const {
+    std::stringstream ss;
+    
+    ss << livro.getId() << ";" 
+       << livro.getTitulo() << ";" 
+       << livro.getAutor() << ";" 
+       << livro.getEditora() << ";" 
+       << livro.getAno() << ";" 
+       << (livro.isDisponivel() ? "1" : "0");
+
+    return ss.str();
+}
+
+Livro LivroRepository::livroFromCSV(const std::string& linhaCSV) {
+    std::stringstream ss(linhaCSV);
+    std::string idStr, titulo, autor, editora, anoStr, disponivelStr;
+    std::getline(ss, idStr, ';');
+    std::getline(ss, titulo, ';');
+    std::getline(ss, autor, ';');
+    std::getline(ss, editora, ';');
+    std::getline(ss, anoStr, ';');
+    std::getline(ss, disponivelStr, ';');
+
+    return Livro(std::stoi(idStr), titulo, autor, editora, std::stoi(anoStr), disponivelStr == "1");
+}
+
+
 bool LivroRepository::adicionarLivro(const Livro& livro) {
     arquivoLivros.abrir("escrita");
-    arquivoLivros.escreverLinhaFinal(livro.toCSV());
+    arquivoLivros.escreverLinhaFinal(this->livroToCSV(livro));
     arquivoLivros.fechar();
     return true;
 }
@@ -23,7 +49,7 @@ std::deque<Livro> LivroRepository::listarLivros() {
     std::deque<Livro> livros;
     for (auto& linha : linhas) {
         if (!linha.empty()) {
-            livros.push_back(Livro::fromCSV(linha));
+            livros.push_back(this->livroFromCSV(linha));
         }
     }
     return livros;
@@ -38,7 +64,7 @@ bool LivroRepository::removerLivro(int idLivro) {
     std::deque<std::string> novasLinhas;
 
     for (auto& linha : linhas) {
-        Livro l = Livro::fromCSV(linha);
+        Livro l = this->livroFromCSV(linha);
         if (l.getId() != idLivro) {
             novasLinhas.push_back(linha);
         } else {
@@ -66,9 +92,9 @@ bool LivroRepository::atualizarLivro(const Livro& livro) {
     std::deque<std::string> novasLinhas;
 
     for (auto& linha : linhas) {
-        Livro l = Livro::fromCSV(linha);
+        Livro l = this->livroFromCSV(linha);
         if (l.getId() == livro.getId()) {
-            novasLinhas.push_back(livro.toCSV());
+            novasLinhas.push_back(this->livroToCSV(livro));
             atualizado = true;
         } else {
             novasLinhas.push_back(linha);
