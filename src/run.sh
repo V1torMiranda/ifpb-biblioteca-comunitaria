@@ -1,3 +1,3 @@
 # !/bin/bash
 
-g++ ./*.cpp ./*/*/*.cpp -o app  && ./app && rm ./app
+g++ ./*.cpp ./classes/*/*.cpp ./interfaces/*.cpp ./repositories/*.cpp ./services/*/*.cpp -o app && ./app && rm ./app
