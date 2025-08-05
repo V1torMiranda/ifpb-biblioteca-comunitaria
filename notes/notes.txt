@@ -1,3 +1,10 @@
+Padrões utilizados: {
+  - Facade (modificar)
+  - Adapter (X)
+  - 
+}
+
+
 -> Sempre quando for abrir um arquivo, o caminho de referência é o diretório onde o executável está localizado
 
 -> Id como uuid.
