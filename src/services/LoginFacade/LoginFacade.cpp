@@ -16,8 +16,8 @@
 #include "Comandos/ModificarUsuarioCommand.h"
 #include "Comandos/RemoverUsuarioCommand.h"
 
-LoginFacade::LoginFacade(const std::string& caminhoUsuarios)
-        : usuarioRepo(caminhoUsuarios) {}
+LoginFacade::LoginFacade(const std::string& caminhoUsuarios, const std::string& caminhoLivros)
+        : usuarioRepo(caminhoUsuarios), livroRepo(caminhoLivros) {}
 
 bool LoginFacade::login(const std::string& email, const std::string& senha) {
     return usuarioRepo.validarCredenciais(email, senha);
@@ -29,15 +29,12 @@ bool LoginFacade::isAdmin(const std::string& email) {
 
 void LoginFacade::limparTela() {
 #ifdef _WIN32
-    // Windows
     std::system("cls");
 #else
-    // Linux / Mac - usa códigos ANSI para limpar a tela e posicionar o cursor no topo
     std::cout << "\x1B[2J\x1B[H";
     std::cout.flush();
 #endif
 }
-
 
 void LoginFacade::desenharLinha(int tamanho) {
     for (int i = 0; i < tamanho; i++)
@@ -58,6 +55,7 @@ void LoginFacade::desenharTitulo(const std::string& titulo) {
 
 void LoginFacade::exibirMenuPadrao() {
     desenharTitulo("MENU MEMBRO COMUM");
+    std::cout << endl;
     std::cout << "1 - Consultar acervo" << std::endl;
     std::cout << "2 - Realizar emprestimo" << std::endl;
     std::cout << "3 - Devolver livro" << std::endl;
@@ -87,7 +85,7 @@ void LoginFacade::registrarComandos(bool admin) {
         comandos[5] = std::make_unique<ModificarUsuarioCommand>();
         comandos[6] = std::make_unique<RemoverUsuarioCommand>();
     } else {
-        comandos[1] = std::make_unique<ConsultarAcervoCommand>();
+        comandos[1] = std::make_unique<ConsultarAcervoCommand>(livroRepo);  // Passando o livroRepo
         comandos[2] = std::make_unique<RealizarEmprestimoCommand>();
         comandos[3] = std::make_unique<DevolverLivroCommand>();
         comandos[4] = std::make_unique<VisualizarPerfilCommand>();
@@ -102,13 +100,14 @@ void LoginFacade::exibirMenuPrincipal(const std::string& email) {
     std::string linha;
 
     while (opcao != 0) {
-        limparTela();              // Limpa e prepara para desenhar menu
+        limparTela();
 
         if (admin)
             exibirMenuAdmin();
         else
             exibirMenuPadrao();
 
+        std::cout << endl;
         std::cout << "Escolha uma opcao: ";
         std::getline(std::cin, linha);
 
@@ -119,6 +118,7 @@ void LoginFacade::exibirMenuPrincipal(const std::string& email) {
         }
 
         if (opcao == 0) {
+            std::cout << endl;
             std::cout << "Encerrando sistema...\n";
             break;
         }
@@ -127,10 +127,10 @@ void LoginFacade::exibirMenuPrincipal(const std::string& email) {
         if (it != comandos.end()) {
             it->second->execute();
         } else {
+            std::cout << endl;
             std::cout << "Opcao invalida.\n";
         }
 
-        // Após executar ou avisar, espera o ENTER para continuar (antes de limpar a tela no próximo loop)
         std::cout << "\nPressione ENTER para continuar...";
         std::getline(std::cin, linha);
     }

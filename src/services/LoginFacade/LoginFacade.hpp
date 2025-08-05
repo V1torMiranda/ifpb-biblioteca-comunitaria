@@ -1,32 +1,32 @@
 #ifndef LOGIN_FACADE_HPP
 #define LOGIN_FACADE_HPP
 
-#include "../../repositories/UsuarioRepository.h"
 #include <string>
-#include <string>
-#include <map>
+#include <unordered_map>
 #include <memory>
-#include "ICommand.h"
+#include "../../repositories/UsuarioRepository.h"
+#include "../../repositories/LivroRepository.h"
+#include "Comandos/ConsultarAcervoCommand.h"
 
 class LoginFacade {
 private:
     UsuarioRepository usuarioRepo;
-    std::map<int, std::unique_ptr<ICommand>> comandos;
+    LivroRepository livroRepo;  // Agora temos o repositório de livros
+    std::unordered_map<int, std::unique_ptr<ICommand>> comandos;
 
-    void registrarComandos(bool admin);
     void limparTela();
     void desenharLinha(int tamanho);
     void desenharTitulo(const std::string& titulo);
-
     void exibirMenuPadrao();
     void exibirMenuAdmin();
+    void registrarComandos(bool admin);
 
 public:
-    explicit LoginFacade(const std::string& caminhoUsuarios);
+    LoginFacade(const std::string& caminhoUsuarios, const std::string& caminhoLivros);
+
     bool login(const std::string& email, const std::string& senha);
     bool isAdmin(const std::string& email);
     void exibirMenuPrincipal(const std::string& email);
 };
 
 #endif
-
