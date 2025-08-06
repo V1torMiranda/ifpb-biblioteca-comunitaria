@@ -12,6 +12,10 @@
 
 class EstadoConcluido : public EstadoEmprestimo {
 public:
+
+    EstadoConcluido();
+    ~EstadoConcluido();
+
     void devolverLivro(Emprestimo& emprestimo) override;
     void verificarStatus(Emprestimo& emprestimo) override;
     std::string nome() const override { return "Concluido"; }

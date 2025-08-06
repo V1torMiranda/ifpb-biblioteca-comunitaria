@@ -6,6 +6,11 @@
 #include "EstadoConcluido.h"
 #include "Emprestimo.h"
 
+
+EstadoConcluido::EstadoConcluido() = default;
+
+EstadoConcluido::~EstadoConcluido() = default;
+
 void EstadoConcluido::devolverLivro(Emprestimo& emprestimo) {
     std::cout << "O livro ja foi devolvido anteriormente. Nenhuma acao necessaria.\n";
 }

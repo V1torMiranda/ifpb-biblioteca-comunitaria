@@ -1,7 +1,9 @@
 Padrões utilizados: {
   - Adapter (X)
-  - Facade (modificar)
   - Repository (X)
+  - Facade (modificar)
+  - Command (?)
+  - State (?)
 }
 
 

@@ -1,11 +1,7 @@
-//
-// Created by vitor on 29/07/2025.
-//
-
 #include <iostream>
-#include "../ifpb-biblioteca-comunitaria/src/services/state/Emprestimo.h"
-#include "../ifpb-biblioteca-comunitaria/src/services/state/EstadoEmAndamento.h"
-#include "../ifpb-biblioteca-comunitaria/src/services/state/EstadoAtrasado.h"
+#include "Emprestimo.h"
+#include "EstadoEmAndamento.h"
+#include "EstadoAtrasado.h"
 
 int main() {
     Emprestimo e1(std::make_unique<EstadoEmAndamento>(), 5);
