@@ -1,7 +1,0 @@
-C:/Users/vitor/Documents/biblioteca_comunitaria/ifpb-biblioteca-comunitaria/cmake-build-debug/CMakeFiles/biblioteca_comunitaria.dir
-C:/Users/vitor/Documents/biblioteca_comunitaria/ifpb-biblioteca-comunitaria/cmake-build-debug/CMakeFiles/test_state.dir
-C:/Users/vitor/Documents/biblioteca_comunitaria/ifpb-biblioteca-comunitaria/cmake-build-debug/CMakeFiles/test_login.dir
-C:/Users/vitor/Documents/biblioteca_comunitaria/ifpb-biblioteca-comunitaria/cmake-build-debug/CMakeFiles/test_livro.dir
-C:/Users/vitor/Documents/biblioteca_comunitaria/ifpb-biblioteca-comunitaria/cmake-build-debug/CMakeFiles/test_login_menu.dir
-C:/Users/vitor/Documents/biblioteca_comunitaria/ifpb-biblioteca-comunitaria/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/vitor/Documents/biblioteca_comunitaria/ifpb-biblioteca-comunitaria/cmake-build-debug/CMakeFiles/rebuild_cache.dir
