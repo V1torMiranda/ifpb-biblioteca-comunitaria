@@ -4,6 +4,7 @@
 Usuario::Usuario(std::string nome, std::string email, std::string senha, std::string curso, int creditos)
         : nome(std::move(nome)), email(std::move(email)), senha(std::move(senha)), curso(std::move(curso)), creditos(creditos) {}
 
+int Usuario::getId() const { return id;}
 std::string Usuario::getNome() const { return nome; }
 std::string Usuario::getEmail() const { return email; }
 std::string Usuario::getSenha() const { return senha; }

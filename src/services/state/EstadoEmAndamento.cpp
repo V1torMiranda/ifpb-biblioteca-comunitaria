@@ -7,6 +7,10 @@
 #include "Emprestimo.h"
 #include "EstadoConcluido.h"
 
+
+EstadoEmAndamento::EstadoEmAndamento() = default;
+EstadoEmAndamento::~EstadoEmAndamento() = default;
+
 void EstadoEmAndamento::devolverLivro(Emprestimo& emprestimo) {
     std::cout << "Livro devolvido com sucesso!\n";
     emprestimo.definirEstado(std::make_unique<EstadoConcluido>());

@@ -12,6 +12,10 @@
 
 class EstadoEmAndamento : public EstadoEmprestimo {
 public:
+
+    EstadoEmAndamento();  // declarado
+    ~EstadoEmAndamento(); // declarado
+
     void devolverLivro(Emprestimo& emprestimo) override;
     void verificarStatus(Emprestimo& emprestimo) override;
     std::string nome() const override { return "Em andamento"; }
