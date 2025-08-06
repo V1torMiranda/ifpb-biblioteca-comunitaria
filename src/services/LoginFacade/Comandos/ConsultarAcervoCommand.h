@@ -13,7 +13,7 @@
 
 #include "../ICommand.h"
 #include <iostream>
-#include "../repositories/LivroRepository.h"
+#include "../../repositories/LivroRepository/LivroRepository.h"
 
 class ConsultarAcervoCommand : public ICommand {
 private:

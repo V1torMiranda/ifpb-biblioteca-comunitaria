@@ -4,6 +4,7 @@
 
 
 #include "ConsultarAcervoCommand.h"
+#include "../../repositories/LivroRepository/LivroRepository.h"
 #include "../utils/ConsoleUtils.h"
 #include <iostream>
 
