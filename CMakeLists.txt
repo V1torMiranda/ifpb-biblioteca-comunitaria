@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.27)
 project(biblioteca_comunitaria)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 
 # Diretórios de includes para o projeto principal
 include_directories(
@@ -14,20 +16,20 @@ include_directories(
 
 # Executável principal
 add_executable(biblioteca_comunitaria
-        src/classes/User/User.cpp
-        src/classes/User/User.hpp
+        src/classes/Usuario/Usuario.cpp
+        src/classes/Usuario/Usuario.hpp
         src/interfaces/ManipuladorArquivoInterface.hpp
         src/services/FstreamAdapter/FstreamAdapter.cpp
         src/services/FstreamAdapter/FstreamAdapter.hpp
         src/services/LoginFacade/LoginFacade.cpp
         src/services/LoginFacade/LoginFacade.hpp
         src/index.cpp
-        src/repositories/UsuarioRepository.cpp
+        src/repositories/UsuarioRepository/UsuarioRepository.cpp
         test_login/main.cpp
-<<<<<<< HEAD
+
         src/classes/Livro/Livro.h
         src/classes/Livro/Livro.cpp
-        src/repositories/LivroRepository.cpp
+        src/repositories/LivroRepository/LivroRepository.cpp
         test_login_menu/main.cpp
         src/services/LoginFacade/Comandos/ConsultarAcervoCommand.cpp
         src/services/LoginFacade/Comandos/ConsultarAcervoCommand.cpp
@@ -49,8 +51,10 @@ add_executable(biblioteca_comunitaria
         src/services/LoginFacade/Comandos/ModificarUsuarioCommand.h
         src/services/LoginFacade/Comandos/RemoverUsuarioCommand.cpp
         src/services/LoginFacade/ICommand.h
-=======
->>>>>>> cf5146800141e1a1d1353bc84f6d951df50ec80f
+        src/repositories/LivroRepository/LivroRepository.cpp
+        src/repositories/EmprestimoRepository/EmprestimoRepository.cpp
+        src/repositories/EmprestimoRepository/EmprestimoRepository.h
+
 )
 
 # Executável de teste (State Pattern)
@@ -68,7 +72,7 @@ target_include_directories(test_state PRIVATE
 
 add_executable(test_login
         test_login/main.cpp
-        src/repositories/UsuarioRepository.cpp
+        src/repositories/UsuarioRepository/UsuarioRepository.cpp
         src/services/LoginFacade/LoginFacade.cpp
         src/services/FstreamAdapter/FstreamAdapter.cpp
 )
@@ -79,22 +83,26 @@ target_include_directories(test_login PRIVATE
         services/FstreamAdapter
 )
 
-<<<<<<< HEAD
+
 add_executable(test_livro
         test_livro/main.cpp
         src/classes/Livro/Livro.cpp
-        src/repositories/LivroRepository.cpp
+        src/repositories/LivroRepository/LivroRepository.cpp
         src/services/FstreamAdapter/FstreamAdapter.cpp
 )
 
 add_executable(test_login_menu
         test_login_menu/main.cpp
         src/services/LoginFacade/LoginFacade.cpp
-        src/repositories/UsuarioRepository.cpp
-        src/repositories/LivroRepository.cpp       # <-- Faltava este
+        src/repositories/EmprestimoRepository/EmprestimoRepository.cpp
+        src/services/state/Emprestimo.cpp
+        src/services/state/EstadoEmAndamento.cpp
+        src/services/state/EstadoConcluido.cpp
+        src/repositories/UsuarioRepository/UsuarioRepository.cpp
+        src/repositories/LivroRepository/LivroRepository.cpp       # <-- Faltava este
         src/classes/Livro/Livro.cpp                      # <-- E este (ou onde estiver a classe Livro)
         src/services/FstreamAdapter/FstreamAdapter.cpp
-        src/classes/User/User.cpp
+        src/classes/Usuario/Usuario.cpp
         src/utils/ConsoleUtils.cpp
 
 
@@ -113,7 +121,6 @@ add_executable(test_login_menu
         src/services/LoginFacade/Comandos/RemoverUsuarioCommand.cpp
 )
 
-=======
->>>>>>> cf5146800141e1a1d1353bc84f6d951df50ec80f
+
 
 

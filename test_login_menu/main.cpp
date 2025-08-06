@@ -10,9 +10,10 @@ int main() {
     // Caminhos para os arquivos de dados
     std::string caminhoUsuarios = "../database/users.txt";
     std::string caminhoLivros   = "../database/books.txt";
+    std::string caminhoEmprestimos = "../database/emprestimos.txt";
 
-    // Cria a fachada com os dois repositórios
-    LoginFacade facade(caminhoUsuarios, caminhoLivros);
+    LoginFacade facade(caminhoUsuarios, caminhoLivros, caminhoEmprestimos);
+
 
     std::string email, senha;
 
