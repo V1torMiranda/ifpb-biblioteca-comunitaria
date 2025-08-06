@@ -8,15 +8,21 @@
 #endif //BIBLIOTECA_COMUNITARIA_DEVOLVERLIVROCOMMAND_H
 
 // Comandos/DevolverLivroCommand.hpp
-#ifndef DEVOLVER_LIVRO_COMMAND_HPP
-#define DEVOLVER_LIVRO_COMMAND_HPP
+#ifndef DEVOLVER_LIVRO_COMMAND_H
+#define DEVOLVER_LIVRO_COMMAND_H
 
-#include "../ICommand.h"
-#include <iostream>
+#include "ICommand.h"
+#include "../../../repositories/LivroRepository/LivroRepository.h"
+#include <memory>
 
 class DevolverLivroCommand : public ICommand {
+private:
+    LivroRepository& livroRepo;
+
 public:
+    explicit DevolverLivroCommand(LivroRepository& repo);
     void execute() override;
 };
 
 #endif
+
