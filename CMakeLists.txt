@@ -24,6 +24,33 @@ add_executable(biblioteca_comunitaria
         src/index.cpp
         src/repositories/UsuarioRepository.cpp
         test_login/main.cpp
+<<<<<<< HEAD
+        src/classes/Livro/Livro.h
+        src/classes/Livro/Livro.cpp
+        src/repositories/LivroRepository.cpp
+        test_login_menu/main.cpp
+        src/services/LoginFacade/Comandos/ConsultarAcervoCommand.cpp
+        src/services/LoginFacade/Comandos/ConsultarAcervoCommand.cpp
+        src/services/LoginFacade/Comandos/ConsultarAcervoCommand.cpp
+        src/services/LoginFacade/Comandos/ConsultarAcervoCommand.h
+        src/services/LoginFacade/Comandos/DevolverLivroCommand.cpp
+        src/services/LoginFacade/Comandos/DevolverLivroCommand.h
+        src/services/LoginFacade/Comandos/VisualizarPerfilCommand.cpp
+        src/services/LoginFacade/Comandos/VisualizarPerfilCommand.h
+        src/services/LoginFacade/Comandos/CadastrarLivroCommand.cpp
+        src/services/LoginFacade/Comandos/CadastrarLivroCommand.h
+        src/services/LoginFacade/Comandos/ModificarLivroCommand.h
+        src/services/LoginFacade/Comandos/ModificarLivroCommand.cpp
+        src/services/LoginFacade/Comandos/RemoverLivroCommand.h
+        src/services/LoginFacade/Comandos/RemoverLivroCommand.cpp
+        src/services/LoginFacade/Comandos/CadastrarUsuarioCommand.cpp
+        src/services/LoginFacade/Comandos/CadastrarUsuarioCommand.h
+        src/services/LoginFacade/Comandos/ModificarUsuarioCommand.cpp
+        src/services/LoginFacade/Comandos/ModificarUsuarioCommand.h
+        src/services/LoginFacade/Comandos/RemoverUsuarioCommand.cpp
+        src/services/LoginFacade/ICommand.h
+=======
+>>>>>>> cf5146800141e1a1d1353bc84f6d951df50ec80f
 )
 
 # Executável de teste (State Pattern)
@@ -52,5 +79,41 @@ target_include_directories(test_login PRIVATE
         services/FstreamAdapter
 )
 
+<<<<<<< HEAD
+add_executable(test_livro
+        test_livro/main.cpp
+        src/classes/Livro/Livro.cpp
+        src/repositories/LivroRepository.cpp
+        src/services/FstreamAdapter/FstreamAdapter.cpp
+)
+
+add_executable(test_login_menu
+        test_login_menu/main.cpp
+        src/services/LoginFacade/LoginFacade.cpp
+        src/repositories/UsuarioRepository.cpp
+        src/repositories/LivroRepository.cpp       # <-- Faltava este
+        src/classes/Livro/Livro.cpp                      # <-- E este (ou onde estiver a classe Livro)
+        src/services/FstreamAdapter/FstreamAdapter.cpp
+        src/classes/User/User.cpp
+        src/utils/ConsoleUtils.cpp
+
+
+        # Comandos do membro comum
+        src/services/LoginFacade/Comandos/ConsultarAcervoCommand.cpp
+        src/services/LoginFacade/Comandos/RealizarEmprestimoCommand.cpp
+        src/services/LoginFacade/Comandos/DevolverLivroCommand.cpp
+        src/services/LoginFacade/Comandos/VisualizarPerfilCommand.cpp
+
+        # Comandos do administrador
+        src/services/LoginFacade/Comandos/CadastrarLivroCommand.cpp
+        src/services/LoginFacade/Comandos/ModificarLivroCommand.cpp
+        src/services/LoginFacade/Comandos/RemoverLivroCommand.cpp
+        src/services/LoginFacade/Comandos/CadastrarUsuarioCommand.cpp
+        src/services/LoginFacade/Comandos/ModificarUsuarioCommand.cpp
+        src/services/LoginFacade/Comandos/RemoverUsuarioCommand.cpp
+)
+
+=======
+>>>>>>> cf5146800141e1a1d1353bc84f6d951df50ec80f
 
 
