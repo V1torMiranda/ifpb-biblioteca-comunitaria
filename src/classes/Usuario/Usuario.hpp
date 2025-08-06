@@ -9,12 +9,14 @@ private:
     std::string email;
     std::string senha;
     std::string curso;
+    int id;
     int creditos;
 
 public:
     Usuario() = default;
     Usuario(std::string nome, std::string email, std::string senha, std::string curso, int creditos);
 
+    int getId() const;
     std::string getNome() const;
     std::string getEmail() const;
     std::string getSenha() const;
