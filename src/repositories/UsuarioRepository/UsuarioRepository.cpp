@@ -1,4 +1,4 @@
-#include "UsuarioRepository.h"
+#include "./UsuarioRepository.h"
 #include <sstream>
 #include <iostream>
 
@@ -48,7 +48,6 @@ bool UsuarioRepository::validarCredenciais(const std::string& email, const std::
     arquivoUsuarios.fechar();
     return false;
 }
-
 
 bool UsuarioRepository::isAdmin(const std::string& email) {
     arquivoUsuarios.abrir("leitura");

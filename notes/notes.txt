@@ -1,7 +1,17 @@
+Padrões utilizados: {
+  - Adapter (X)
+  - Facade (modificar)
+  - Repository (X)
+}
+
+
 -> Sempre quando for abrir um arquivo, o caminho de referência é o diretório onde o executável está localizado
 
--> Id como uuid.
 -> Adm's são identificados pela terminação "@adm.ifpb.edu.br" no email
+
+-> Id como uuid.
+
+-> O UsuarioRepository só consegue validar se a linha for passada no modo CSV
 
 -> Cursos disponíveis: {
   - Informática: info
