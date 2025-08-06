@@ -3,18 +3,18 @@
 #include "./LivroRepository.h"
 #include <sstream>
 #include <iostream>
+#include <optional>
 
 LivroRepository::LivroRepository(const std::string& caminhoArquivo) : arquivoLivros(caminhoArquivo) {}
 
-
 std::string LivroRepository::livroToCSV(const Livro& livro) const {
     std::stringstream ss;
-    
-    ss << livro.getId() << ";" 
-       << livro.getTitulo() << ";" 
-       << livro.getAutor() << ";" 
-       << livro.getEditora() << ";" 
-       << livro.getAno() << ";" 
+
+    ss << livro.getId() << ";"
+       << livro.getTitulo() << ";"
+       << livro.getAutor() << ";"
+       << livro.getEditora() << ";"
+       << livro.getAno() << ";"
        << (livro.isDisponivel() ? "1" : "0");
 
     return ss.str();
@@ -32,7 +32,6 @@ Livro LivroRepository::livroFromCSV(const std::string& linhaCSV) {
 
     return Livro(std::stoi(idStr), titulo, autor, editora, std::stoi(anoStr), disponivelStr == "1");
 }
-
 
 bool LivroRepository::adicionarLivro(const Livro& livro) {
     arquivoLivros.abrir("escrita");
@@ -110,4 +109,38 @@ bool LivroRepository::atualizarLivro(const Livro& livro) {
     }
 
     return atualizado;
+}
+
+std::optional<Livro> LivroRepository::buscarPorId(int idLivro) {
+    auto livros = listarLivros();
+    for (const auto& livro : livros) {
+        if (livro.getId() == idLivro) {
+            return livro;
+        }
+    }
+    return std::nullopt;
+}
+
+bool LivroRepository::atualizarStatus(int idLivro, bool disponivel) {
+    auto livros = listarLivros();
+    bool atualizado = false;
+
+    for (auto& livro : livros) {
+        if (livro.getId() == idLivro) {
+            livro.setDisponivel(disponivel);
+            atualizado = true;
+            break;
+        }
+    }
+
+    if (!atualizado) return false;
+
+    // Regrava todos os livros com o status atualizado
+    arquivoLivros.abrir("sobrescrita");
+    for (auto& livro : livros) {
+        arquivoLivros.escreverLinhaFinal(livroToCSV(livro));
+    }
+    arquivoLivros.fechar();
+
+    return true;
 }

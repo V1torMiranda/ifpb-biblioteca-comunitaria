@@ -1,6 +1,7 @@
 #include "./UsuarioRepository.h"
 #include <sstream>
 #include <iostream>
+#include <optional>
 
 UsuarioRepository::UsuarioRepository(const std::string& caminhoArquivo)
         : arquivoUsuarios(caminhoArquivo) {}
@@ -49,6 +50,25 @@ bool UsuarioRepository::validarCredenciais(const std::string& email, const std::
     return false;
 }
 
+Usuario UsuarioRepository::usuarioFromCSV(const std::string& linhaCSV) {
+    std::stringstream ss(linhaCSV);
+    std::string idStr, nome, email, senha, curso, creditosStr;
+
+    // Se o CSV tem id como primeira coluna, lemos mas ignoramos
+    std::getline(ss, idStr, ';');
+    std::getline(ss, nome, ';');
+    std::getline(ss, email, ';');
+    std::getline(ss, senha, ';');
+    std::getline(ss, curso, ';');
+    std::getline(ss, creditosStr, ';');
+
+    int creditos = creditosStr.empty() ? 0 : std::stoi(creditosStr);
+
+    return {nome, email, senha, curso, creditos};
+}
+
+
+
 bool UsuarioRepository::isAdmin(const std::string& email) {
     arquivoUsuarios.abrir("leitura");
     if (arquivoUsuarios.getModo() != "leitura") {
@@ -92,3 +112,18 @@ bool UsuarioRepository::isAdmin(const std::string& email) {
     return false;
 }
 
+std::optional<Usuario> UsuarioRepository::buscarPorEmail(const std::string& email) {
+    arquivoUsuarios.abrir("leitura");
+    auto linhas = arquivoUsuarios.lerTodosDados();
+    arquivoUsuarios.fechar();
+
+    for (const auto& linha : linhas) {
+        if (!linha.empty()) {
+            Usuario usuario = this->usuarioFromCSV(linha);
+            if (usuario.getEmail() == email) {
+                return usuario;
+            }
+        }
+    }
+    return std::nullopt;
+}

@@ -14,6 +14,7 @@
 #include "../../services/FstreamAdapter/FstreamAdapter.hpp"
 #include "../../classes/Livro/Livro.h"
 #include <deque>
+#include <optional>
 
 class LivroRepository {
 private:
@@ -23,12 +24,14 @@ private:
     Livro livroFromCSV(const std::string& linhaCSV);
 
 public:
-    LivroRepository(const std::string& caminhoArquivo);
+    explicit LivroRepository(const std::string& caminhoArquivo);
 
     std::deque<Livro> listarLivros();
     bool adicionarLivro(const Livro& livro);
     bool removerLivro(int idLivro);
     bool atualizarLivro(const Livro& livro);
+    std::optional<Livro> buscarPorId(int idLivro);
+    bool atualizarStatus(int idLivro, bool disponivel);
 };
 
 #endif
