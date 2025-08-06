@@ -1,21 +1,20 @@
-//
-// Created by vitor on 30/07/2025.
-//
+#ifndef VISUALIZARPERFILCOMMAND_H
+#define VISUALIZARPERFILCOMMAND_H
 
-#ifndef BIBLIOTECA_COMUNITARIA_VISUALIZARPERFILCOMMAND_H
-#define BIBLIOTECA_COMUNITARIA_VISUALIZARPERFILCOMMAND_H
-
-#endif //BIBLIOTECA_COMUNITARIA_VISUALIZARPERFILCOMMAND_H
-
-// Comandos/VisualizarPerfilCommand.hpp
-#ifndef VISUALIZAR_PERFIL_COMMAND_HPP
-#define VISUALIZAR_PERFIL_COMMAND_HPP
-
+#include "../../repositories/UsuarioRepository/UsuarioRepository.h"
+#include "../../repositories/EmprestimoRepository/EmprestimoRepository.h"
 #include "../ICommand.h"
-#include <iostream>
+#include <string>
 
 class VisualizarPerfilCommand : public ICommand {
+private:
+    UsuarioRepository& usuarioRepo;
+    EmprestimoRepository& emprestimoRepo;
+    std::string emailUsuario;
+
 public:
+    VisualizarPerfilCommand(UsuarioRepository& uRepo, EmprestimoRepository& eRepo, const std::string& email);
+
     void execute() override;
 };
 
