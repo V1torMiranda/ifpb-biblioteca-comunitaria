@@ -1,6 +1,7 @@
 #include "./LoginFacade.hpp"
 #include <iostream>
 #include <limits>
+#include "../../classes/Usuario/Usuario.hpp"
 
 // Comandos do membro comum
 #include "Comandos/ConsultarAcervoCommand.h"
@@ -16,8 +17,13 @@
 #include "Comandos/ModificarUsuarioCommand.h"
 #include "Comandos/RemoverUsuarioCommand.h"
 
-LoginFacade::LoginFacade(const std::string& caminhoUsuarios)
-        : usuarioRepo(caminhoUsuarios) {}
+LoginFacade::LoginFacade(const std::string& caminhoUsuarios,
+                         const std::string& caminhoLivros,
+                         const std::string& caminhoEmprestimos)
+        : usuarioRepo(caminhoUsuarios),
+          livroRepo(caminhoLivros),
+          emprestimoRepo(caminhoEmprestimos) {}
+
 
 bool LoginFacade::login(const std::string& email, const std::string& senha) {
     return usuarioRepo.validarCredenciais(email, senha);
@@ -27,36 +33,27 @@ bool LoginFacade::isAdmin(const std::string& email) {
     return usuarioRepo.isAdmin(email);
 }
 
-/**
- * Código original obtido em: https://pt.stackoverflow.com/questions/448483/implementa%C3%A7%C3%A3o-do-split-em-c. 
- * Data de acesso: 29/07/2025
-*/
 deque<string> split(const string& text, char sep = ' ') {
-  deque<string> elements;
-  size_t start = 0, end = 0;
+    deque<string> elements;
+    size_t start = 0, end = 0;
 
-  while ((end = text.find(sep, start)) != string::npos)
-  {
-    elements.push_back(text.substr(start, end - start));
-    start = end + 1;
-  }
+    while ((end = text.find(sep, start)) != string::npos) {
+        elements.push_back(text.substr(start, end - start));
+        start = end + 1;
+    }
 
-  elements.push_back(text.substr(start));
-  return elements;
+    elements.push_back(text.substr(start));
+    return elements;
 }
-
 
 void LoginFacade::limparTela() {
-    #ifdef _WIN32
-        // Windows
-        std::system("cls");
-    #else
-        // Linux / Mac - usa códigos ANSI para limpar a tela e posicionar o cursor no topo
-        std::cout << "\x1B[2J\x1B[H";
-        std::cout.flush();
-    #endif
+#ifdef _WIN32
+    std::system("cls");
+#else
+    std::cout << "\x1B[2J\x1B[H";
+    std::cout.flush();
+#endif
 }
-
 
 void LoginFacade::desenharLinha(int tamanho) {
     for (int i = 0; i < tamanho; i++)
@@ -95,7 +92,7 @@ void LoginFacade::exibirMenuAdmin() {
     std::cout << "0 - Sair" << std::endl;
 }
 
-void LoginFacade::registrarComandos(bool admin) {
+void LoginFacade::registrarComandos(bool admin, const std::string& email) {
     comandos.clear();
 
     if (admin) {
@@ -106,22 +103,22 @@ void LoginFacade::registrarComandos(bool admin) {
         comandos[5] = std::make_unique<ModificarUsuarioCommand>();
         comandos[6] = std::make_unique<RemoverUsuarioCommand>();
     } else {
-        comandos[1] = std::make_unique<ConsultarAcervoCommand>();
-        comandos[2] = std::make_unique<RealizarEmprestimoCommand>();
-        comandos[3] = std::make_unique<DevolverLivroCommand>();
-        comandos[4] = std::make_unique<VisualizarPerfilCommand>();
+        comandos[1] = std::make_unique<ConsultarAcervoCommand>(livroRepo);
+        comandos[2] = std::make_unique<RealizarEmprestimoCommand>(livroRepo, emprestimoRepo, email);
+        comandos[3] = std::make_unique<DevolverLivroCommand>(livroRepo);
+        comandos[4] = std::make_unique<VisualizarPerfilCommand>(usuarioRepo,emprestimoRepo, email);
     }
 }
 
 void LoginFacade::exibirMenuPrincipal(const std::string& email) {
     bool admin = isAdmin(email);
-    registrarComandos(admin);
+    registrarComandos(admin, email);
 
     int opcao = -1;
     std::string linha;
 
     while (opcao != 0) {
-        limparTela();              // Limpa e prepara para desenhar menu
+        limparTela();
 
         if (admin)
             exibirMenuAdmin();
@@ -149,17 +146,16 @@ void LoginFacade::exibirMenuPrincipal(const std::string& email) {
             std::cout << "Opcao invalida.\n";
         }
 
-        // Após executar ou avisar, espera o ENTER para continuar (antes de limpar a tela no próximo loop)
         std::cout << "\nPressione ENTER para continuar...";
         std::getline(std::cin, linha);
     }
 }
 
 void LoginFacade::validaEntrada(int& escolha) {
-  int quantOpcoes = this->opcoes.size();
+    int quantOpcoes = this->opcoes.size();
 
-  while (escolha < 1 || escolha > quantOpcoes) {
-    cout << "Valor inválido. Tente novamente: ";
-    cin >> escolha;
-  }
+    while (escolha < 1 || escolha > quantOpcoes) {
+        std::cout << "Valor inválido. Tente novamente: ";
+        std::cin >> escolha;
+    }
 }
