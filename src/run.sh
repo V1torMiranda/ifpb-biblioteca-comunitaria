@@ -1,3 +1,3 @@
 # !/bin/bash
 
-g++ ./*.cpp ./classes/*/*.cpp ./repositories/**/*.cpp ./services/FstreamAdapter/*.cpp -o app && ./app && rm ./app
+g++ ./*.cpp ./classes/*/*.cpp ./interfaces/*.cpp ./repositories/*.cpp ./services/*/*.cpp -o app && ./app && rm ./app
